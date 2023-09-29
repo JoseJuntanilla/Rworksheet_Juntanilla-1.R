@@ -61,20 +61,108 @@ nega_seq
 # 6. The following data shows the diesel fuel purchased by Mr. Cruz.
 
 # a. Create a data frame for month, price per liter (php and purchase-quantity (liter). Write the R scripts and its output.
-month_list <- c("Jan" ,"Feb","March","Apr","May","June")
-
-month_list  
-Price_per_lit <- c(52.50, 57.25, 60.00, 65.00, 74.25, 54.00)
-Price_per_lit
-Purchase_quantity <- c(25, 30, 40, 50, 10, 45)
-Purchase_quantity
-full_data_set <- c(month_list=price_per_lit=Purchase_quantity)
+full_data_set <- data.frame(
+month_list = c("Jan" ,"Feb","March","Apr","May","June"),
+Price_in_litter = c(52.50, 57.25, 60.00, 65.00, 74.25, 54.00),
+Purchase_quantity = c(25, 30, 40, 50, 10, 45)
+)
 full_data_set
 # b. What is the average fuel expenditure of Mr. Cruz from
 # Jan to June? Note: Use ‘weighted.mean(liter, purchase)‘. Write the R scripts and its output.
-weighted.mean(Price_per_lit,Purchase_quantity)
+Price_in_litter = c(52.50, 57.25, 60.00, 65.00, 74.25, 54.00)
+Purchase_quantity = c(25, 30, 40, 50, 10, 45)
+weighted.mean(Price_in_litter,Purchase_quantity)
+
 
 # 7. R has actually lots of built-in data sets. For example, the rivers data “gives the lengths
 # (in miles) of 141 “major” rivers in North America, as compiled by the US Geological Survey”.
 
+#a. Type “rivers” in your R console.Create a vector data with 7 elements, containing the number of elements (length)in rivers, their sum (sum), mean (mean),
+# median(median), variance(var), standard deviation(sd),minimum (min) and maximum (max).
+data_vector <- c(length(rivers), sum(rivers), mean(rivers), median(rivers), var(rivers),
+sd(rivers), min(rivers), max(rivers))
+data_vector
 
+#b.What are the results?
+# The result shows different values of what is asked in the rivers.
+
+# 8. The table below gives the 25 most powerful celebrities and their annual pay as ranked
+# by the editions of Forbes magazine and as listed on the Forbes.com website.
+
+# a. Create vectors according to the above table.Write the R scripts and its output.
+ForbesRank <- data.frame(
+PowerRanking = c(1:25),
+Celebrities = c("Tom Cruise","Rolling Stones","Oprah Winfey", "U2","Tiger Woods", "Steven Spielbieg","Howard Stern","50 Cent","Cast of the Sopranos","Dan Brown","Bruce Springsteen","Donald Trump","Muhammad Ali","Paul McCartney","George Lucas","Elton John","David Letterman","Phil Mickelson","J.K Rowling","Bradd Pitt","Peter Jackson","Dr, Phil McGraw","Jay Lenon","Celine Dion","Kobe Bryan"),
+Pay = c(67,90,225,110,90,332,302,41,52,88,55,44,55,40,233,34,40,47,75,25,39,45,32,40,31))
+ForbesRank
+
+# b. Modify the power ranking and pay of J.K. Rowling.Change power ranking to 15 and pay to 90. Write the
+# R scripts and its output.
+ForbesRank$PowerRanking[ForbesRank$Celebrities == "J.K Rowling"] <-15
+ForbesRank$Pay[ForbesRank$Celebrities== "J.K Rowling"] <- 90
+ForbesRank
+
+# c. Create an excel file from the table above and save it as csv file(PowerRanking). Import the csv file into the RStudio. What is the R script?
+# Sample data frame (replace this with your actual data frame)
+
+# d. Access the rows 10 to 20 and save it as Ranks.RData. Write the R script and its output.
+PowerRanking = read.csv('/cloud/project/PowerRanking.csv')
+PowerRanking
+AccessPowerRanking = PowerRanking[c(10:20)]
+AccessPowerRanking
+
+# e. Describe its output.
+# The output is the 10-20 row information in the csv file
+
+# 9.Download the Hotels-Vienna https://tinyurl.com/Hotels-Vienna
+
+# a. Import the excel file into your RStudio.What is the R script?
+##install.package("readxl")
+library(readxl)
+Data <- read_excel("hotels-vienna.xlsx")
+Data
+View(Data)
+
+#b How many dimensions does the dataset have? What is the R script? WHat is its output?
+DimensionSet <- dim(Data)
+DimensionSet
+
+#c Select columns country, neighbourhood,price, stars, accomodation_type, andratings. Write the R script.
+colnames(Input)
+SetColumns <- Input[,c("country", "neighbourhood", "price", "stars", "accommodation_type", "rating")]
+View(SetColumns)
+
+#d Save the data as **new.RData to your RStudio. Write the R script.
+save(SetColumns, file="new.RData")
+View(SetColumns)
+
+#e Display the first six rows and last six rows of the new.RData. What is the R script?
+load("new.RData")
+SetColumns
+
+Head_Six <- head(SetColumns)
+Tail_Six <- tail(SetColumns)
+View(Head_Six)
+View(Tail_Six)
+
+#10.Create a list of ten (10) vegetables you ate during your lifetime. If none, just list down.
+
+#a.  Write the R scripts and its output.
+Vegetables <- list("Potato","Tomato","Coriander","Squash","Bitter gourd","Cabbage","Carrots","Beans","Egg plant","Cucumber")
+Vegetables
+
+#b Add 2 additional vegetables after the last vegetables in the list. What is the R script and its output?
+new_veg_list <- append(Vegetables,c("Capsicum","Peas"))
+new_veg_list
+
+#c Add 4 additional vegetables after index 5. How many datapoints does your vegetable list have? What is the
+# R script and its output?
+new_veg_list<- append(Vegetables,c("Okra","Cauliflower"),after = 5)
+new_veg_list
+
+
+#d Remove the vegetables in index 5, 10, and 15. How many vegetables were left? Write the codes and its output.
+new_veg_list <- Vegetables [c(-5, -10, -15)]
+new_veg_list
+
+# Answer: There are 8 vegetables left.
