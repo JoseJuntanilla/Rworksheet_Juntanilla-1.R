@@ -128,8 +128,8 @@ DimensionSet <- dim(Data)
 DimensionSet
 
 #c Select columns country, neighbourhood,price, stars, accomodation_type, andratings. Write the R script.
-colnames(Input)
-SetColumns <- Input[,c("country", "neighbourhood", "price", "stars", "accommodation_type", "rating")]
+colnames(Data)
+SetColumns <- Data[,c("country", "neighbourhood", "price", "stars", "accommodation_type", "rating")]
 View(SetColumns)
 
 #d Save the data as **new.RData to your RStudio. Write the R script.
