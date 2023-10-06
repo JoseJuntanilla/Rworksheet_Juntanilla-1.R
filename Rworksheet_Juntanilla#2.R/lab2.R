@@ -166,3 +166,4 @@ new_veg_list <- Vegetables [c(-5, -10, -15)]
 new_veg_list
 
 # Answer: There are 8 vegetables left.
+dimnames
