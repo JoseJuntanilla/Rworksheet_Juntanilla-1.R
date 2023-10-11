@@ -30,18 +30,20 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 # code here
 
+```{r}
 #1. Create a data frame using the table below
 
 #1A.
 
 Household_data_frame <- data.frame(
   Respondents = c(1:20),
-  Sex = c("Female","Female","Male","Female","Female","Female","Female","Female","Female","Female","Male","Female","Female","Female","Female","Female","Female","Female","Male","Female"),
-  Fathers_Occupation = c("Farmer","Others","Others","Others","Farmer","Driver","Others","Farmer","Farmer","Farmer","Others","Driver","Farmer","Others","Others","Farmer","Others","Farmer","Driver","Farmer"),
+
+Sex = c("Female","Female","Male","Female","Female","Female","Female","Female","Female","Female","Male","Female","Female","Female","Female","Female","Female","Female","Male","Female"),
+Fathers_Occupation =
+  c("Farmer","Others","Others","Others","Farmer","Driver","Others","Farmer","Farmer","Farmer","Others","Driver","Farmer","Others","Others","Farmer","Others","Farmer","Driver","Farmer"),
   Person_at_Home = c(5,7,3,8,5,9,6,7,8,4,7,5,4,7,8,8,3,11,7,6),
   Siblings_at_school = c(6,4,4,1,2,1,5,3,1,2,3,2,5,5,2,1,2,5,3,2),
   Types_of_house = c("Wood","Semi-Concrete","Concrete","Wood","Wood","Concrete","Concrete","Wood","Semi-Concrete","Concrete","Semi-Concrete","Concrete","Semi-Concrete","Semi-Concrete","Concrete","Concrete","Concrete","Concrete","Concrete","Semi-Concrete")
-  
 )
 Household_data_frame
 
@@ -69,8 +71,7 @@ house_types <- Household_data_frame$Types_of_house
 house_types
 
 #1G. Select only all Males respondent that their father occupation was farmer. Write the codes and its output.
-farmer_male_occ <- Household_data_frame[Household_data_frame$Sex =="Male" & 
-Household_data_frame$Fathers_Occupation == "Farmer", ]
+farmer_male_occ <- Household_data_frame[Household_data_frame$Sex =="Male" & Household_data_frame$Fathers_Occupation == "Farmer", ]
 print(farmer_male_occ)
 
 #1H. Select only all females respondent that have greater than or equal to 5 number of siblings attending school. Write the codes and its outputs.Select only all females respondent that have greater than or equal to 5 number of siblings attending school. Write the codes and its outputs.
@@ -80,11 +81,11 @@ print(female_sib_more_than_5)
 
 #2. Write a R program to create an empty data frame. Using the following codes:
 df <- data.frame(
-  Ints = integer(0),
-  Doubles = double(0),
-  Characters = character(0),
-  Logicals = logical(0),
-  Factors = factor(NA, levels = character(0)),
+  Ints = integer(),
+  Doubles = double(),
+  Characters = character(),
+  Logicals = logical(),
+  Factors = factor(),
   stringsAsFactors = FALSE
 )
 
@@ -116,21 +117,22 @@ data_imported$Sex <- factor(data_imported$Sex, levels = c("Male", "Female"))
 data_imported$Sex <- as.integer(data_imported$Sex)
 
 #3c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood= 1; Congrete = 2; Semi-Congrete = 3]. Write the R codes and its output.
-imported_data$Typeshouse <- factor(imported_data$Typeshouse, levels = c("Wood", "Concrete", "Semi-Concrete"))
-imported_data$Typeshouse <- as.integer(imported_data$Typeshouse)
+data_imported$Typeshouse <- factor(data_imported$Typeshouse, levels = c("Wood", "Concrete", "Semi-Concrete"))
+data_imported$Typeshouse <- as.integer(data_imported$Typeshouse)
 
 #3d. On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What is the R code and its output?
-imported_data$FatherOccupation <- factor(imported_data$FatherOccupation, levels = c("Farmer", "Driver", "Others"))
-imported_data$FatherOccupation <- as.integer(imported_data$FatherOccupation)
+data_imported$FatherOccupation <- factor(data_imported$FatherOccupation, levels = c("Farmer", "Driver", "Others"))
+data_imported$FatherOccupation <- as.integer(data_imported$FatherOccupation)
 
 #3e. Select only all females respondent that has a father whose occupation is driver. Write the codes and its output.
-female_drivers <- imported_data[imported_data$Sex == 2 & imported_data$FatherOccupation == 2, ]
-print(female_drivers)
+girl_drivers <- data_imported[data_imported$Sex == 2 & data_imported$FatherOccupation == 2, ]
+print(girl_drivers)
 
 #3f. Select the respondents that have greater than or equal to 5 number of siblings attending school. Write the codes and its output.
-greater_than_5_siblings <- imported_data[imported_data$Siblingsatschool >= 5, ]
-print(greater_than_5_siblings)
+more_than_5_sib <- data_imported[data_imported$Siblingsatschool >= 5, ]
+print(more_than_5_sib)
 
 #4. Interpret the graph
 
 # The graph in figure 3 represents the sentiments of people every day that has a major impact on our world everytime. In short, we always allow ourselves to show our opinions and our knowledge that we learn in a all day basis.
+```
