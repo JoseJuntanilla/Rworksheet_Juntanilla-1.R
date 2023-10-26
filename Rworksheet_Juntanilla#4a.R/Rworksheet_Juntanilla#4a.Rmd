@@ -49,7 +49,12 @@ Household_subset_Female <- subset(Household_data,Gender == "F",select = c(Shoe_s
 Household_subset_Female
 
 # 1c.Find the mean of shoe size and height of the respondents. Write the R scripts and its result.
-shoesize_and_height_mean <- mean(Household_data)
+mean_shoe_size <- mean(Household_data$Shoe_size)
+mean_shoe_size
+
+mean_Height <- mean(Household_data$Height)
+mean_Height
+
 
 # 1d. Is there a relationship between shoe size and height? Why?
 
