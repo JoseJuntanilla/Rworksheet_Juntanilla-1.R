@@ -71,3 +71,4 @@ summary(Factor_months)
 #4. Create a vector and factor for the table below.
 
 ```
+
