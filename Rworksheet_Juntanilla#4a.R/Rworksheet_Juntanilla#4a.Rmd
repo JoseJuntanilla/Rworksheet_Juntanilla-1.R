@@ -1,7 +1,7 @@
 ---
 title: "Rworksheet_Juntanilla#4a.Rmd"
 output: pdf_document
-date: "2023-10-25"
+date: "2023-10-26"
 ---
 
 ```{r setup, include=FALSE}
@@ -27,8 +27,7 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-
+```
 # code here:
 
 # 1. The table below shows the data about shoe size and height. Create a data frame.
@@ -70,5 +69,32 @@ Factor_months
 summary(Factor_months)
 
 #4. Create a vector and factor for the table below.
+Direction_vector <- c("East", "West", "North")
+Frequency_vector <- c( 1, 4, 3)
+
+Direction_factor <- factor(Direction_vector,levels = c("East", "West", "North"))
+print(Direction_factor)
+Frequency_factor <- factor(Frequency_vector,levels = c(1,4,3))
+print(Frequency_factor)
+
+# 5a.Import the excel file into the Environment Pane using read.table() function.Write the code.
+library(readr)
+import_march <- read_csv("/cloud/project/import_march.csv")
+
+# 5b.View the dataset. Write the R scripts and its result.
+View(import_march)
+
+# 6.
+
+
+# 7.
+
+
+# 8.
+
+
+
+
+```
 
 
