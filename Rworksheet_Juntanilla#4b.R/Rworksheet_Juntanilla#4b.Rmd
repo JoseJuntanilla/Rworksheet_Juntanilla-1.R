@@ -1,0 +1,48 @@
+---
+title: "Rworksheet_Juntanilla#4b.Rmd"
+output: pdf_document
+date: "2023-11-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+# code here
+# 1. Using the for loop, create an R script that will display a 5x5 matrix as shown in Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix.
+
+vector_a <- matrix(1:5,5,5)
+for (i in seq_len(nrow(vector_a))) {
+  for (j in seq_len(ncol(vector_a))) {
+    print(vector_a[i,j])
+    
+  }
+  
+}
+
+# 2. Print the string "*" using for() function. The output should be the same as shown in Figure 1.
+
+newVec <- 1:5
+matrixvec <- matrix(0, nrow=5, ncol=5)
+
+for (i in 1:nrow(matrixvec)) {
+  for (j in 1:ncol(matrixvec)) {
+    matrixvec[i,j] <- abs(vectorA[i]-vectorA[j])
+    cat(matrixA[i,j], "\t")
+  }
+  cat("\n")
+}
+
+for(k in 1:5) {
+  cat("*")
+}
+
+
+
+
+# 3. Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
+
+
+```
