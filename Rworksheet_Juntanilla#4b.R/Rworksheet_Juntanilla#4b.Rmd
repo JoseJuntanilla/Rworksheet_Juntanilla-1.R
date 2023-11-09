@@ -13,15 +13,18 @@ knitr::opts_chunk$set(echo = TRUE)
 # code here
 # 1. Using the for loop, create an R script that will display a 5x5 matrix as shown in Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix.
 
-vector_a <- matrix(1:5,5,5)
-for (i in seq_len(nrow(vector_a))) {
-  for (j in seq_len(ncol(vector_a))) {
-    print(vector_a[i,j])
-    
-  }
-  
+vector_a = c(1:5)
+a_matrix <- matrix(0, nrow=5,  ncol=5)
+for(a in 1:5){
+ for(b in 1:5){
+   a_matrix[a,b] <- abs(a-b) + vector_a[b]
+ }
 }
+print(a_matrix)
 
+```
+
+```{r}
 # 2. Print the string "*" using for() function. The output should be the same as shown in Figure 1.
 
 newVec <- 1:5
@@ -29,8 +32,8 @@ matrixvec <- matrix(0, nrow=5, ncol=5)
 
 for (i in 1:nrow(matrixvec)) {
   for (j in 1:ncol(matrixvec)) {
-    matrixvec[i,j] <- abs(vectorA[i]-vectorA[j])
-    cat(matrixA[i,j], "\t")
+    matrixvec[i,j] <- abs(newVec[i]-newVec[j])
+    cat(matrixvec[i,j], "\t")
   }
   cat("\n")
 }
@@ -38,11 +41,45 @@ for (i in 1:nrow(matrixvec)) {
 for(k in 1:5) {
   cat("*")
 }
+```
 
 
-
-
+```{r}
 # 3. Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
+num <- as.numeric(prompt(readline("Enter numbers for Fibonacchi:")))
 
+ran_num <- 0
+num_ran <- 1
+com_num <- ran_num + num_ran
+
+repeat {
+  if (com_num > 500) {
+    break
+  }
+  if (ran_num == 0 & num_ran == 1) {
+    cat(num_ran, " ")
+  }
+  cat(com_num, " ")
+  ran_num <- num_ran
+  num_ran <- com_num
+  com_num <- ran_num + num_ran
+}
+```
+
+```{r}
+# 4. Import the dataset as shown in Figure 1 you have created previously.
+
+# a.
+Shoedata <- read.csv("Shoesdata")
+
+# b.
+
+
+# c.
+```
+
+```{r}
+# 5. The monthly income of Dela Cruz family was spent on the following:
+# a. 
 
 ```
