@@ -9,77 +9,287 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+1.
 ```{r}
-# code here
-# 1. Using the for loop, create an R script that will display a 5x5 matrix as shown in Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix.
+Vec_a <- c(1,2,3,4,5)
+mat_a <- matrix(Vec_a, nrow=5, ncol=5)
 
-vector_a = c(1:5)
-a_matrix <- matrix(0, nrow=5,  ncol=5)
-for(a in 1:5){
- for(b in 1:5){
-   a_matrix[a,b] <- abs(a-b) + vector_a[b]
- }
+Vec_b <- c(0)
+mat_b <- matrix(Vec_b, nrow=5,ncol=5)
+
+for(i in length(Vec_a)){
+  mat_b[i,] <- abs(Vec_a-Vec_b[i])
+  mat_b[is.na(mat_b)] <- 0
 }
-print(a_matrix)
+print(mat_b)
+
 
 ```
-
+\
+2.
 ```{r}
-# 2. Print the string "*" using for() function. The output should be the same as shown in Figure 1.
 
-newVec <- 1:5
-matrixvec <- matrix(0, nrow=5, ncol=5)
+for(i in 1:5){
+  star-vec <- rep("*",i)
+  print(star_vec)
+}
 
-for (i in 1:nrow(matrixvec)) {
-  for (j in 1:ncol(matrixvec)) {
-    matrixvec[i,j] <- abs(newVec[i]-newVec[j])
-    cat(matrixvec[i,j], "\t")
+```
+\
+3.
+```{r}
+ran_num <- as.numeric(readline("Enter the starting number for fibonacci sequence: "))
+
+if(is.na(ran_num || ran_num < 0)){
+  cat("Please enter something")
+  }else{
+    n <- ran_num
+    r <- 1
   }
-  cat("\n")
-}
-
-for(k in 1:5) {
-  cat("*")
-}
-```
 
 
-```{r}
-# 3. Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
-num <- as.numeric(prompt(readline("Enter numbers for Fibonacchi:")))
-
-ran_num <- 0
-num_ran <- 1
-com_num <- ran_num + num_ran
-
-repeat {
-  if (com_num > 500) {
+cat("Fibonacci sequence starting from",ran_num,"up to 500\n")
+repeat{
+  
+  num = n + r
+  if (num > 500){
     break
   }
-  if (ran_num == 0 & num_ran == 1) {
-    cat(num_ran, " ")
-  }
-  cat(com_num, " ")
-  ran_num <- num_ran
-  num_ran <- com_num
-  com_num <- ran_num + num_ran
+  cat(num, " ")
+  n <- r
+  r <- num
+  
 }
-```
 
+
+
+```
+\
+4a.
 ```{r}
-# 4. Import the dataset as shown in Figure 1 you have created previously.
+data_shoes <- read.csv("Shoesdata.csv")
 
-# a.
-Shoedata <- read.csv("Shoesdata")
-
-# b.
+data_shoes
 
 
-# c.
 ```
-
+\
+4b.
 ```{r}
-# 5. The monthly income of Dela Cruz family was spent on the following:
-# a. 
+genmale <- subset(data_shoes, Gender == 'M')
+
+genfemale <- subset(data_shoes, Gender == 'F')
+
+cat("Number of obsevation in male:",nrow(genmale),"\n")
+cat("Number of observation in female",nrow(genfemale),"\n")
+
+
+
 
 ```
+\
+4c.
+```{r}
+gen_male_and_fem <- table(data_shoes$Gender)
+
+barplot(gen_male_and_fem,
+        main = "The Number of Female and Male",
+        xlab = "Gender",
+        ylab = "Count",
+        col = c("blue","yellow"),
+        legend.text =c("Male", "Female"))
+```
+\
+5a.
+```{r}
+fam_income <- c(60,10,5,25)
+
+pie(fam_income,labels = paste0(fam_income,"%"),
+    main = "Dela Cruz Family Expenses", col = rainbow(length(fam_income)))
+
+legend("topright", legend = c("Food","Electricity", "Savings","Miscellaneous"),
+       fill = rainbow(length(fam_income)))
+
+```
+\
+6a.
+```{r}
+data(iris)
+
+str(iris)
+
+#The data iris have 150 observation and 5 variables  and it composes sepal.length,sepal.width,petal.length,and petal.width.
+
+```
+
+6b.
+```{r}
+data(iris)
+
+irismeans <- colMeans(iris[, 1:4])
+
+irismeans
+
+```
+\
+6c.
+```{r}
+data(iris)
+
+irisspecies <- table(iris$Species)
+
+pie(irisspecies, labels = names(species),
+    col = rainbow(length(species)),
+    main = "Species Distribution")
+
+legend("topright", legend = names(species),
+       fill = rainbow(length(species)), title = "Species")
+
+
+
+
+
+
+```
+
+\
+6d.
+```{r}
+data(iris)
+
+setosa_col <- subset(iris, Species == "setosa")
+versicolor_col <- subset(iris, Species == "versicolor")
+virginica_col <- subset(iris, Species == "virginica")
+
+tail(setosa_col)
+tail(versicolor_col)
+tail(virginica_col)
+
+```
+\
+6e.
+```{r}
+data(iris)
+
+iris$Species <- as.factor(iris$Species)
+
+colors <- c("setosa" = "#96a240", "versicolor" = "#66a2a5", "virginica" = "#b239cc")
+symbols <- c("setosa" = 4, "versicolor" = 9, "virginica" = 8)
+
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     col = colors[iris$Species], 
+     pch = symbols[iris$Species],
+     main = "Iris Dataset",
+     sub = "Sepal Width and Length",
+     xlab = "Sepal Length",
+     ylab = "Sepal Width")
+
+legend("bottomright",legend = levels(iris$Species),col= colors, pch = symbols, title = "Species") 
+
+#6e
+#by factoring the species, it will be represents as a categories in R. 
+```
+
+\
+7.
+```{r}
+library(readxl)
+
+alexa_file <- read_excel("alexa_file.xlsx")
+
+alexa_file
+
+```
+
+\
+7a.
+```{r}
+
+alexa_file$variation <- gsub("Black Dot", "BlackDot", alexa_file$variation)
+alexa_file$variation <- gsub("Black Plus", "BlackPlus", alexa_file$variation)
+alexa_file$variation <- gsub("Black Show", "BlackShow", alexa_file$variation)
+alexa_file$variation <- gsub("Black Spot", "BlackSpot", alexa_file$variation)
+
+alexa_file$variation <- gsub("White Dot", "WhiteDot", alexa_file$variation)
+alexa_file$variation <- gsub("White Plus", "WhitePlus", alexa_file$variation)
+alexa_file$variation <- gsub("White Show", "WhiteShow", alexa_file$variation)
+alexa_file$variation <- gsub("White Spot", "WhiteSpot", alexa_file$variation)
+
+alexa_file
+
+```
+
+\
+7b.
+```{r}
+library("dplyr")
+
+total_var <- alexa_file %>%
+  count(alexa_file$variation)
+
+total_var
+
+save(total_var, file= "variations.RData")
+
+
+
+```
+
+
+\
+7c.
+```{r}
+load("variations.RData")
+total_var
+
+variable_alexa <- total_var$`alexa_file$variation`
+
+lexplot <- barplot(total_var$n,
+                     names.arg = variable_alexa,
+                     main = "Total number of variations",
+                     xlab = "Name of Variations",
+                     ylab = "Total of each variations",
+                     col = 1:12,
+                     space = 0.2,
+                     cex.names = 0.6,
+                     las = 3)
+knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla/Rworksheet4/lexplot.jpeg")
+
+
+
+
+
+```
+
+
+\
+7d.
+```{r}
+black_var <- total_var[total_var$`alexa_file$variation`%in%c("Black", "BlackPlus" , "BlackShow" ,"BlackSpot" , "BlackDot"),]
+
+whitevar <- total_var[total_var$`alexa_file$variation`%in%c("White", "WhiteDot", "WhitePlus", "WhiteShow", "WhiteSpot"),]
+
+par(mfrow = c(1,2))
+
+blackvar
+
+blackvarplot <- barplot(height = blackvar$n,
+                        names.arg = blackvar$`alexa_file$variation`,
+                        col = c("black"),
+                        xlab = "Variation",
+                        ylab = "Count",
+                        border = "black",
+                        space = 0.5,
+                        cex.names = 0.4)
+
+
+whitevarplot <- barplot(height = white$n,
+                        names.arg = blackvar$`alexa_file$variation`,
+                        col = "white",
+                        xlab = "Variation",
+                        ylab = "Count",
+                        border = "black",
+                        space = 0.5,
+                        cex.names = 0.4)
+
+knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla/Rworksheet4/black_and_white_plot.jpeg")
