@@ -30,7 +30,7 @@ print(mat_b)
 ```{r}
 
 for(i in 1:5){
-  star-vec <- rep("*",i)
+  star_vec <- rep("*",i)
   print(star_vec)
 }
 
@@ -253,7 +253,10 @@ lexplot <- barplot(total_var$n,
                      space = 0.2,
                      cex.names = 0.6,
                      las = 3)
-knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla/Rworksheet4/lexplot.jpeg")
+png("lexplot.png")
+dev.off()
+
+knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla#4b.R/Rworksheet4/lexplot.png")
 
 
 
@@ -291,5 +294,7 @@ whitevarplot <- barplot(height = white$n,
                         border = "black",
                         space = 0.5,
                         cex.names = 0.4)
+png("plotwhitevar.png")
+dev.off()
 
-knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla/Rworksheet4/black_and_white_plot.jpeg")
+knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla/Rworksheet4/plotwhitevar.png")
