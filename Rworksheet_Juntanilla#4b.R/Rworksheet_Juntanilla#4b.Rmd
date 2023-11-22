@@ -25,6 +25,18 @@ print(mat_b)
 
 
 ```
+```{r}
+vectorA = c(1,2,3,4,5)
+matrixA <-matrix (0, nrow = 5, ncol =5)
+
+for (x in 1:5){
+  for (y in 1:5){
+      matrixA[x,y] <- abs(x-y)+ vectorA[y]
+  }
+}
+
+print(matrixA)    
+```
 \
 2.
 ```{r}
@@ -37,7 +49,7 @@ for(i in 1:5){
 ```
 \
 3.
-```{r}
+```{r error=TRUE}
 ran_num <- as.numeric(readline("Enter the starting number for fibonacci sequence: "))
 
 if(is.na(ran_num || ran_num < 0)){
@@ -138,12 +150,12 @@ data(iris)
 
 irisspecies <- table(iris$Species)
 
-pie(irisspecies, labels = names(species),
-    col = rainbow(length(species)),
+pie(irisspecies, labels = names(irisspecies),
+    col = rainbow(length(irisspecies)),
     main = "Species Distribution")
 
-legend("topright", legend = names(species),
-       fill = rainbow(length(species)), title = "Species")
+legend("topright", legend = names(irisspecies),
+       fill = rainbow(length(irisspecies)), title = "Species")
 
 
 
@@ -256,7 +268,7 @@ lexplot <- barplot(total_var$n,
 png("lexplot.png")
 dev.off()
 
-knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla#4b.R/Rworksheet4/lexplot.png")
+knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla#4b.R/lexplot.png")
 
 
 
@@ -265,36 +277,39 @@ knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla#4b.R/Rworksheet4/l
 ```
 
 
-\
 7d.
 ```{r}
-black_var <- total_var[total_var$`alexa_file$variation`%in%c("Black", "BlackPlus" , "BlackShow" ,"BlackSpot" , "BlackDot"),]
-
-whitevar <- total_var[total_var$`alexa_file$variation`%in%c("White", "WhiteDot", "WhitePlus", "WhiteShow", "WhiteSpot"),]
+library(RColorBrewer)
 
 par(mfrow = c(1,2))
 
-blackvar
 
-blackvarplot <- barplot(height = blackvar$n,
-                        names.arg = blackvar$`alexa_file$variation`,
-                        col = c("black"),
-                        xlab = "Variation",
-                        ylab = "Count",
-                        border = "black",
+varplotblack <- barplot(height = c(261,270,265,241,516), 
+                        names.arg = c("Black","BlackPlus","BlackShow","BlackSpot","BlackDot"), main = "Black Variations",
+                        col = 1:5,
                         space = 0.5,
-                        cex.names = 0.4)
-
-
-whitevarplot <- barplot(height = white$n,
-                        names.arg = blackvar$`alexa_file$variation`,
-                        col = "white",
                         xlab = "Variation",
-                        ylab = "Count",
-                        border = "black",
-                        space = 0.5,
-                        cex.names = 0.4)
-png("plotwhitevar.png")
+                        ylab = "Count")
+
+png("varplotblack.png")
 dev.off()
 
-knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla/Rworksheet4/plotwhitevar.png")
+knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla#4b.R/varplotblack.png")
+
+varplotwhite <- barplot(height = c(91,184,78,85,109), 
+                        names.arg = c("White", "WhiteDot", "WhitePlus", "WhiteShow", "WhiteSpot"),
+                        main = "White Variations",
+                        space = 1,
+                        col = 4:10,
+                        xlab = "Variation",
+                        ylab = "Count",)
+
+
+
+png("varplotwhite.png")
+dev.off()
+
+knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla#4b.R/varplotwhite.png")
+
+knitr::include_graphics("/cloud/project/Rworksheet_Juntanilla#4b.R/varplotblackandwhite.png")
+```
