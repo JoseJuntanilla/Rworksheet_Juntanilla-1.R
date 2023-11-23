@@ -148,22 +148,23 @@ cat("Variables of the traffic dataset:", variablesdf, "\n")
 
 ```{r}
 #B.
-trafficjunction <- subset.data.frame(trafficvars, Type == "Junction")
+trafficjunction <- subset(trafficvars,Junction == 1)
 print(trafficjunction)
 ```
 
 ```{r}
+#C.
 library(ggplot2)
 
-ggplot(junctions, aes(x = Time, y = Count, group = Junction, color = Junction)) +
+ggplot(trafficvars, aes(x = DateTime, y = Junction, group = Junction, color = Junction)) +
  geom_line() +
- labs(title = "Junctions Traffic", x = "Time", y = "Count") +
- theme_minimal()
+ labs(title = "Junctions Graph", x = "Time", y = "Junction") +
+ geom_line()
 ```
-
+\
+7.
 ```{r}
-#7
-#A.
+#A.In short there are 3150 obs. and 5 variables.
 library(openxlsx)
 
 alexa_file <- read.xlsx("alexa_file.xlsx")
@@ -175,8 +176,8 @@ print(dim(alexa_file))
 library(dplyr)
 
 alexa_file %>%
- group_by(Variation) %>%
- summarise(Total = sum(NumberOfVerifiedReviews))
+ group_by(variation) %>%
+ summarise(Total = sum(verified_reviews))
 ```
 
 ```{r}
@@ -188,10 +189,10 @@ ggplot(alexa_file, aes(x = Date, y = NumberOfVerifiedReviews, group = Variation,
 ```
 ```{r}
 #D.
-ggplot(alexa_file, aes(x = Date, y = NumberOfVerifiedReviews, group = 1)) +
+ggplot(alexa_file, aes(x = date, y = verified_reviews, group = 1)) +
  geom_line() +
- labs(title = "Verified Reviews", x = "Date", y = "NumberOfVerifiedReviews") +
- theme_minimal()
+ labs(title = "Verified Reviews", x = "date", y = "verified_reviews") +
+ 
 ```
 ```{r}
 #E.
