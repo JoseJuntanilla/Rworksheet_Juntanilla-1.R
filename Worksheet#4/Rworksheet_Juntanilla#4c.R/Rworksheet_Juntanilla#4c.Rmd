@@ -206,3 +206,4 @@ ggplot(alexa_file, aes(x = Rating, y = NumberOfVerifiedReviews, group = Variatio
  labs(title = "Variations and Ratings", x = "Rating", y = "NumberOfVerifiedReviews") +
  theme_minimal()
 ```
+
