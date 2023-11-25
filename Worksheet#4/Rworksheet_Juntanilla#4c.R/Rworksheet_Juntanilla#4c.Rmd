@@ -10,11 +10,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 \
 1.
-```{r}
+```{r error=TRUE} 
 #Use the dataset mpg
 mpgdataset <- read.csv("mpg.csv")
 view(mpgdataset)
 ```
+
 ```{r}
 #B.
 manufacturervar <- c("manufacturer", "model", "trans", "drv", "fl", "class")
@@ -129,7 +130,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = cyl)) +
   scale_color_gradient(low = "blue", high = "red") +
   theme_minimal()
 ```
-```{r}
+```{r error = TRUE}
 #6.
 
 trafficvars <- read.csv("traffic.csv")
@@ -148,8 +149,9 @@ cat("Variables of the traffic dataset:", variablesdf, "\n")
 
 ```{r}
 #B.
-trafficjunction <- subset(trafficvars,Junction == 1)
-print(trafficjunction)
+trafficjunction <- c(1,2,3,4)
+trafficsets <- trafficvars[trafficvars$Junction %in% trafficjunction, ]
+trafficsets
 ```
 
 ```{r}
@@ -175,35 +177,66 @@ print(dim(alexa_file))
 #B.
 library(dplyr)
 
-alexa_file %>%
- group_by(variation) %>%
- summarise(Total = sum(verified_reviews))
+ groupalexa <- alexa_file %>%
+   group_by(variation)%>%
+ summarise(totalcount_ = n())
+ 
+groupalexa
 ```
 
 ```{r}
 #C.
-ggplot(alexa_file, aes(x = Date, y = NumberOfVerifiedReviews, group = Variation, color = Variation)) +
- geom_line() +
- labs(title = "Variations", x = "Date", y = "NumberOfVerifiedReviews") +
+library(ggplot2)
+ggplot(alexa_file, aes(x = variation)) +
+ geom_bar() +
+ labs(title = "Number of Distributions of Variations",
+      x= "Variation,",
+      y= "Count") +
  theme_minimal()
 ```
 ```{r}
 #D.
-ggplot(alexa_file, aes(x = date, y = verified_reviews, group = 1)) +
- geom_line() +
- labs(title = "Verified Reviews", x = "date", y = "verified_reviews") +
- 
+alexa_file$date <- as.Date(alexa_file$date)
+
+alexa_file$month <- format(alexa_file$date, "%m")
+
+alexarev <- alexa_file %>%
+  group_by(month) %>%
+  summarise(num_reviews = n())
+
+
+monthlyrev <- table(alexarev)
+
+ggplot(alexarev, aes(x = month, y = num_reviews, group = 1)) +
+  geom_line(color = "green") +
+  labs(title = "Number of Verified Reviews Per Month",
+       x = "Year 2017", y = " Reviews")
 ```
+
+
 ```{r}
 #E.
-alexa_file %>%
- group_by(Variation) %>%
- summarise(AvgRating = mean(Rating)) %>%
- arrange(desc(AvgRating))
+library(dplyr)
 
-ggplot(alexa_file, aes(x = Rating, y = NumberOfVerifiedReviews, group = Variation, color = Variation)) +
- geom_line() +
- labs(title = "Variations and Ratings", x = "Rating", y = "NumberOfVerifiedReviews") +
- theme_minimal()
+ggplot(alexa_file, aes(x = variation, y = rating, fill = variation)) +
+  geom_bar(stat = "summary", fun = "mean", position = "dodge") +
+  scale_fill_manual(values = rainbow(n = length(unique(alexa_file$variation)))) +  
+  labs(title = "Variations and Ratings",
+       x = "Variations",
+       y = "Average Rating") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 80, hjust = 1))
+
+
+var_ratings <- alexa_file %>%
+  group_by(variation) %>%
+  summarise(average_rating = mean(rating, na.rm = TRUE))
+
+max_rating <- max(var_ratings$average_rating, na.rm = TRUE)
+
+highrate <- alexa_file %>%
+  filter(rating == max_rating)
+print(highrate)
+
 ```
 
