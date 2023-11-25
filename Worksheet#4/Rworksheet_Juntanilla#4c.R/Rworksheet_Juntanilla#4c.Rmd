@@ -238,5 +238,6 @@ highrate <- alexa_file %>%
   filter(rating == max_rating)
 print(highrate)
 
+
 ```
 
